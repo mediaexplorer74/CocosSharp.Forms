@@ -6,8 +6,11 @@ CocosSharp[.Xamarin]Forms RnD  (UWP platform addition/implementation where MonoG
 
 ## Status / Progress
 - UWP target added
-- Build failed at now.
-- Doing more research & Fixing bugs
+- Build compiled at/by now. :)
+- Doing more research & fixing "app logics" ...
+
+## ToDo
+Migrate all portable projects onto .NET standard "world".
 
 ## References / Credits
 - https://github.com/andywcoder/CocosSharp	
