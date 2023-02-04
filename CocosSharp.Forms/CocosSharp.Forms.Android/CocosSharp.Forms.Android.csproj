@@ -13,7 +13,7 @@
     <AndroidResgenClass>Resource</AndroidResgenClass>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <TargetFrameworkVersion>v13.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,13 +69,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Resource.designer.cs" />
-    <Compile Include="..\..\src\EmbeddableView\Xam.Forms\CocosSharpView.cs">
+    <Compile Include="..\..\CocosSharp\EmbeddableView\Xam.Forms\CocosSharpView.cs">
       <Link>CocosSharpView.cs</Link>
     </Compile>
-    <Compile Include="..\..\src\EmbeddableView\Xam.Forms\CocosSharpViewRenderer.Common.cs">
+    <Compile Include="..\..\CocosSharp\EmbeddableView\Xam.Forms\CocosSharpViewRenderer.Common.cs">
       <Link>CocosSharpViewRenderer.Common.cs</Link>
     </Compile>
-    <Compile Include="..\..\src\EmbeddableView\Xam.Forms\CocosSharpViewRenderer.Droid.cs">
+    <Compile Include="..\..\CocosSharp\EmbeddableView\Xam.Forms\CocosSharpViewRenderer.Droid.cs">
       <Link>CocosSharpViewRenderer.Droid.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -109,7 +109,7 @@
       <Name>Lidgren.Network.Android</Name>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\CocosSharp.Android.csproj">
+    <ProjectReference Include="..\..\CocosSharp\CocosSharp.Android.csproj">
       <Project>{64725C5B-A1BC-4974-8538-A1158BABF572}</Project>
       <Name>CocosSharp.Android</Name>
       <Private>False</Private>

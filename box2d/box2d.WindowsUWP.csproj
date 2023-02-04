@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\Microsoft.Net.UWPCoreRuntimeSdk.props" Condition="Exists('..\packages\Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\Microsoft.Net.UWPCoreRuntimeSdk.props')" />
+  <Import Project="..\packages\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.props" Condition="Exists('..\packages\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.props')" />
+  <Import Project="..\packages\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.props" Condition="Exists('..\packages\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.props')" />
+  <Import Project="..\packages\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.props" Condition="Exists('..\packages\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.props')" />
+  <Import Project="..\packages\Microsoft.Net.Native.Compiler.2.0.3\build\Microsoft.Net.Native.Compiler.props" Condition="Exists('..\packages\Microsoft.Net.Native.Compiler.2.0.3\build\Microsoft.Net.Native.Compiler.props')" />
+  <Import Project="..\packages\Microsoft.Net.Native.SharedLibrary-x86.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x86.props" Condition="Exists('..\packages\Microsoft.Net.Native.SharedLibrary-x86.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x86.props')" />
+  <Import Project="..\packages\Microsoft.Net.Native.SharedLibrary-x64.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x64.props" Condition="Exists('..\packages\Microsoft.Net.Native.SharedLibrary-x64.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x64.props')" />
+  <Import Project="..\packages\Microsoft.Net.Native.SharedLibrary-arm.2.0.0\build\Microsoft.Net.Native.SharedLibrary-arm.props" Condition="Exists('..\packages\Microsoft.Net.Native.SharedLibrary-arm.2.0.0\build\Microsoft.Net.Native.SharedLibrary-arm.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,11 +19,13 @@
     <AssemblyName>box2d</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.14393.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.14393.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -187,10 +197,50 @@
     <Compile Include="Rope\b2Rope.cs" />
     <Compile Include="Rope\b2RopeDef.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\Microsoft.Net.Native.Compiler.2.0.3\tools\Packages\Microsoft.NETNative.Analyzer\1.0.0\analyzers\dotnet\cs\NativeGatekeeper.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Runtime.Serialization.Primitives, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Serialization.Primitives.4.3.0\lib\netcore50\System.Runtime.Serialization.Primitives.dll</HintPath>
+    </Reference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Native.SharedLibrary-arm.2.0.0\build\Microsoft.Net.Native.SharedLibrary-arm.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Native.SharedLibrary-arm.2.0.0\build\Microsoft.Net.Native.SharedLibrary-arm.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Native.SharedLibrary-arm.2.0.0\build\Microsoft.Net.Native.SharedLibrary-arm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Native.SharedLibrary-arm.2.0.0\build\Microsoft.Net.Native.SharedLibrary-arm.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Native.SharedLibrary-x64.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Native.SharedLibrary-x64.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x64.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Native.SharedLibrary-x64.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Native.SharedLibrary-x64.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x64.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Native.SharedLibrary-x86.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Native.SharedLibrary-x86.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x86.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Native.SharedLibrary-x86.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Native.SharedLibrary-x86.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x86.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Native.Compiler.2.0.3\build\Microsoft.Net.Native.Compiler.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Native.Compiler.2.0.3\build\Microsoft.Net.Native.Compiler.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Native.Compiler.2.0.3\build\Microsoft.Net.Native.Compiler.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Native.Compiler.2.0.3\build\Microsoft.Net.Native.Compiler.targets'))" />
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.props'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.targets'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.props'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.targets'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.props'))" />
+    <Error Condition="!Exists('..\packages\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\Microsoft.Net.UWPCoreRuntimeSdk.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\Microsoft.Net.UWPCoreRuntimeSdk.props'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.Net.Native.SharedLibrary-arm.2.0.0\build\Microsoft.Net.Native.SharedLibrary-arm.targets" Condition="Exists('..\packages\Microsoft.Net.Native.SharedLibrary-arm.2.0.0\build\Microsoft.Net.Native.SharedLibrary-arm.targets')" />
+  <Import Project="..\packages\Microsoft.Net.Native.SharedLibrary-x64.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x64.targets" Condition="Exists('..\packages\Microsoft.Net.Native.SharedLibrary-x64.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x64.targets')" />
+  <Import Project="..\packages\Microsoft.Net.Native.SharedLibrary-x86.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x86.targets" Condition="Exists('..\packages\Microsoft.Net.Native.SharedLibrary-x86.2.0.0\build\Microsoft.Net.Native.SharedLibrary-x86.targets')" />
+  <Import Project="..\packages\Microsoft.Net.Native.Compiler.2.0.3\build\Microsoft.Net.Native.Compiler.targets" Condition="Exists('..\packages\Microsoft.Net.Native.Compiler.2.0.3\build\Microsoft.Net.Native.Compiler.targets')" />
+  <Import Project="..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.1\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Import Project="..\packages\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.targets" Condition="Exists('..\packages\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-arm.Microsoft.Net.UWPCoreRuntimeSdk.targets')" />
+  <Import Project="..\packages\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.targets" Condition="Exists('..\packages\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x64.Microsoft.Net.UWPCoreRuntimeSdk.targets')" />
+  <Import Project="..\packages\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets" Condition="Exists('..\packages\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.2.1.2\build\runtime.win10-x86.Microsoft.Net.UWPCoreRuntimeSdk.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

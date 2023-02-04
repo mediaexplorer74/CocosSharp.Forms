@@ -1,4 +1,4 @@
-﻿/*
+/*
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -7,11 +7,26 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CocosSharp")]
-[assembly: AssemblyProduct("CocosSharp")]
+[assembly: AssemblyTitle("CocosSharp.Forms")]
+[assembly: AssemblyProduct("CocosSharp.Forms")]
 
-[assembly: AssemblyDescription("CocosSharp for Xamarin.Forms")]
-
+#if WINDOWSDX
+[assembly: AssemblyDescription("CocosSharp.Forms for Windows Desktop (DX)")]
+#elif WINDOWSGL
+[assembly: AssemblyDescription("CocosSharp.Forms for Windows Desktop (OpenGL)")]
+#elif ANDROID
+[assembly: AssemblyDescription("CocosSharp.Forms for Android")]
+#elif IPHONE
+[assembly: AssemblyDescription("CocosSharp.Forms for iOS")]
+#elif NETFX_CORE
+[assembly: AssemblyDescription("CocosSharp.Forms for Windows RT")]
+#elif WINDOWS_PHONE8
+[assembly: AssemblyDescription("CocosSharp.Forms for Windows Phone 8")]
+#elif MACOS
+[assembly: AssemblyDescription("CocosSharp.Forms for Mac OSX")]
+#else
+[assembly: AssemblyDescription("CocosSharp.Forms for Windows Desktop (XNA)")]
+#endif
 
 [assembly: AssemblyCompany("Open Source Software Provided As-Is")]
 [assembly: AssemblyTrademark("")]
@@ -26,7 +41,7 @@ using System.Resources;
 // On Windows, the following GUID is for the ID of the typelib if this
 // project is exposed to COM. On other platforms, it unique identifies the
 // title storage container when deploying this assembly to the device.
-[assembly: Guid("b9c87433-71ae-45dc-963f-6d3166d5c4d7")]
+[assembly: Guid("b9c87433-71ae-458c-963f-6d3166d5c4d7")]
 
 // Version information for an assembly consists of the following four values:
 //

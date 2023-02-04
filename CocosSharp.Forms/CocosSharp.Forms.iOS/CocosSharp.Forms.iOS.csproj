@@ -58,13 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\..\src\EmbeddableView\Xam.Forms\CocosSharpView.cs">
+    <Compile Include="..\..\CocosSharp\EmbeddableView\Xam.Forms\CocosSharpView.cs">
       <Link>CocosSharpView.cs</Link>
     </Compile>
-    <Compile Include="..\..\src\EmbeddableView\Xam.Forms\CocosSharpViewRenderer.Common.cs">
+    <Compile Include="..\..\CocosSharp\EmbeddableView\Xam.Forms\CocosSharpViewRenderer.Common.cs">
       <Link>CocosSharpViewRenderer.Common.cs</Link>
     </Compile>
-    <Compile Include="..\..\src\EmbeddableView\Xam.Forms\CocosSharpViewRenderer.iOS.cs">
+    <Compile Include="..\..\CocosSharp\EmbeddableView\Xam.Forms\CocosSharpViewRenderer.iOS.cs">
       <Link>CocosSharpViewRenderer.iOS.cs</Link>
     </Compile>
   </ItemGroup>
@@ -95,7 +95,7 @@
       <IsWatchApp>false</IsWatchApp>
       <Private>False</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\CocosSharp.iOS.csproj">
+    <ProjectReference Include="..\..\CocosSharp\CocosSharp.iOS.csproj">
       <Project>{511B1B80-F539-4CEC-AB62-3652A9275E7E}</Project>
       <Name>CocosSharp.iOS</Name>
       <Private>False</Private>
