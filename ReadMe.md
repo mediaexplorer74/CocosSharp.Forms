@@ -1,7 +1,8 @@
 # CocosSharp.Forms
 
-CocosSharp Xam.Forms fixing (UWP platform addition/implementation where MonoGame runs)
+CocosSharp[.Xamarin]Forms RnD  (UWP platform addition/implementation where MonoGame runs)
 
+![Hello from Cocos](Images/intro.png)
 
 ## Status / Progress
 - UWP target added
