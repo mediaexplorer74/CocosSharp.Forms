@@ -1,0 +1,52 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+	<TemplateData>
+		<Name>CocosSharp Game (iOS)</Name>
+		<Description>Creates a simple CocosSharp minimal skeleton game solution and project to get developers up and running fast.  This particular template is for iOS.</Description>
+		<ProjectType>CSharp</ProjectType>
+		<ProjectSubType>
+		</ProjectSubType>
+		<SortOrder>1000</SortOrder>
+		<CreateNewFolder>true</CreateNewFolder>
+		<DefaultName>CocosSharpGame</DefaultName>
+		<ProvideDefaultName>true</ProvideDefaultName>
+		<LocationField>Enabled</LocationField>
+		<EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+		<Icon>__TemplateIcon.ico</Icon>
+		<PreviewImage>__PreviewImage.png</PreviewImage>
+	</TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="EmptyProject.iOS.csproj" File="EmptyProject.iOS.csproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="true" TargetFileName="AppDelegate.cs">AppDelegate.cs</ProjectItem>
+      <Folder Name="Content" TargetFolderName="Content">
+        <Folder Name="Fonts" TargetFolderName="Fonts">
+          <ProjectItem ReplaceParameters="false" TargetFileName="MarkerFelt-22.xnb">MarkerFelt-22.xnb</ProjectItem>
+        </Folder>
+      </Folder>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Game.ico">Game.ico</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="GameThumbnail.png">GameThumbnail.png</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Info.plist">Info.plist</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="GameLayer.cs">GameLayer.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="Main.cs">Main.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Main.storyboard">Main.storyboard</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Entitlements.plist">Entitlements.plist</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="ViewController.cs">ViewController.cs</ProjectItem>
+      <ProjectItem ReplaceParameters="true" TargetFileName="ViewController.designer.cs">ViewController.designer.cs</ProjectItem>
+      <Folder Name="Properties" TargetFolderName="Properties">
+        <ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+      </Folder>
+      <Folder Name="Resources" TargetFolderName="Resources">
+        <ProjectItem ReplaceParameters="true" TargetFileName="LaunchScreen.xib">LaunchScreen.xib</ProjectItem>
+      </Folder>
+    </Project>
+  </TemplateContent>
+	<WizardExtension>
+		<Assembly>NuGet.VisualStudio.Interop, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</Assembly>
+		<FullClassName>NuGet.VisualStudio.TemplateWizard</FullClassName>
+	</WizardExtension>
+	<WizardData>
+		<packages repository="extension"
+			  repositoryId="Xamarin.CocosSharpTemplates">
+			<package id="CocosSharp" version="1.7.1.0" />
+		</packages>
+	</WizardData>
+</VSTemplate>
