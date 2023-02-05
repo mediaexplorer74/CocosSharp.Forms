@@ -1,0 +1,60 @@
+﻿<enum-field-mappings>
+  <!--
+  This example converts the constants Fragment_id, Fragment_name,
+  and Fragment_tag from android.support.v4.app.FragmentActivity.FragmentTag
+  to an enum called Android.Support.V4.App.FragmentTagType with values
+  Id, Name, and Tag.
+  
+  <mapping jni-class="android/support/v4/app/FragmentActivity$FragmentTag" clr-enum-type="Android.Support.V4.App.FragmentTagType">
+    <field jni-name="Fragment_name" clr-name="Name" value="0" />
+    <field jni-name="Fragment_id" clr-name="Id" value="1" />
+    <field jni-name="Fragment_tag" clr-name="Tag" value="2" />
+  </mapping>
+  -->
+  <mapping jni-class="tv/ouya/console/api/OuyaController" clr-enum-type="Ouya.Console.Api.AxisType">
+    <field jni-name="AXIS_LS_X" clr-name="LeftX" value="0" />
+    <field jni-name="AXIS_LS_Y" clr-name="LeftY" value="1" />
+    <field jni-name="AXIS_RS_X" clr-name="RightX" value="11" />
+    <field jni-name="AXIS_RS_Y" clr-name="RightY" value="14" />
+    <field jni-name="AXIS_L2" clr-name="LeftTrigger" value="17" />
+    <field jni-name="AXIS_R2" clr-name="RightTrigger" value="18" />
+  </mapping>
+  <mapping jni-class="tv/ouya/console/api/OuyaController" clr-enum-type="Ouya.Console.Api.Buttons">
+    <field jni-name="BUTTON_A" clr-name="A" value="97" />
+    <field jni-name="BUTTON_DPAD_DOWN" clr-name="Down" value="20" />
+    <field jni-name="BUTTON_DPAD_LEFT" clr-name="Left" value="21" />
+    <field jni-name="BUTTON_DPAD_RIGHT" clr-name="Right" value="22" />
+    <field jni-name="BUTTON_DPAD_UP" clr-name="Up" value="19" />
+    <field jni-name="BUTTON_L1" clr-name="LeftBumper" value="102" />
+    <field jni-name="BUTTON_L2" clr-name="LeftTrigger" value="104" />
+    <field jni-name="BUTTON_L3" clr-name="LeftStick" value="106" />
+    <field jni-name="BUTTON_O" clr-name="O" value="96" />
+    <field jni-name="BUTTON_R1" clr-name="RightBumper" value="103" />
+    <field jni-name="BUTTON_R2" clr-name="RightTrigger" value="105" />
+    <field jni-name="BUTTON_R3" clr-name="RightStick" value="107" />
+    <field jni-name="BUTTON_SYSTEM" clr-name="System" value="3" />
+    <field jni-name="BUTTON_U" clr-name="U" value="99" />
+    <field jni-name="BUTTON_Y" clr-name="Y" value="100" />
+  </mapping>
+  <mapping jni-interface="tv/ouya/console/api/OuyaErrorCodes" clr-enum-type="Ouya.Console.Api.ErrorCodes">
+    <field jni-name="CONSOLE_ALREADY_REGISTERED" clr-name="ConsoleAlreadyRegistered" value="2008" />
+    <field jni-name="EMAIL_NOT_CONFIRMED" clr-name="EmailNotConfirmed" value="2010" />
+    <field jni-name="ERROR_PARSING_RESPONSE_FROM_SERVER" clr-name="ErrorParsingResponseFromServer" value="3002" />
+    <field jni-name="ERROR_REMOTE_EXCEPTION" clr-name="ErrorRemoteException" value="3003" />
+    <field jni-name="FIELD_VALIDATIONS_FAILED" clr-name="FieldValidationsFailed" value="2006" />
+    <field jni-name="INSUFFICIENT_CREDIT" clr-name="InsufficientCredit" value="2011" />
+    <field jni-name="INVALID_APP_UUID" clr-name="InvalidAppUuid" value="2005" />
+    <field jni-name="INVALID_AUTHENTICATION_DATA" clr-name="InvalidAuthenticationData" value="2001" />
+    <field jni-name="INVALID_CATEGORY" clr-name="InvalidCategory" value="2012" />
+    <field jni-name="INVALID_CONSOLE_ID" clr-name="InvalidConsoleId" value="2007" />
+    <field jni-name="INVALID_DEVELOPER_UUID" clr-name="InvalidDeveloperUuid" value="2002" />
+    <field jni-name="INVALID_PRODUCT_ID" clr-name="InvalidProductId" value="2003" />
+    <field jni-name="INVALID_TOKEN" clr-name="InvalidToken" value="1000" />
+    <field jni-name="NOT_DEVELOPER" clr-name="NotDeveloper" value="2009" />
+    <field jni-name="NO_AUTHENTICATION_DATA" clr-name="NoAuthenticationData" value="2000" />
+    <field jni-name="PAYMENT_DECLINED" clr-name="PaymentDeclined" value="2004" />
+    <field jni-name="REQUIRED_PARAMETER_NOT_PROVIDED" clr-name="RequiredParameterNotProvided" value="1001" />
+    <field jni-name="SERVER_OFFLINE" clr-name="ServerOffline" value="3005" />
+    <field jni-name="THROW_DURING_ON_SUCCESS" clr-name="ThrowDuringOnSuccess" value="3004" />
+  </mapping>
+  </enum-field-mappings>

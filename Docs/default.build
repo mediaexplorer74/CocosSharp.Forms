@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<project name="CococsSharp Build Script" default="build" basedir=".">
+  <description>Default CocosSharp Automated Build script</description>
+  <property name="os" value="${operating-system::get-platform(environment::get-operating-system())}" />
+  <property name="mdtooldir" value="/Applications/Xamarin\ Studio.app/Contents/MacOS"/>
+  <property name="configuration" value="Release" unless="${property::exists('configuration')}" />
+  <property name="msbuild12dir" value="C:\Program Files (x86)\MSBuild\12.0\Bin" />
+
+  <target name="checkos" description="check the operating system">
+    <property name="os" value="${operating-system::get-platform(environment::get-operating-system())}"/>
+    <if test="${os == 'Unix'}">
+      <if test="${directory::exists('/Applications') and directory::exists('/Library')}">
+        <property name="os" value="MacOS"/>
+        <if test="${not directory::exists(mdtooldir)}">
+          <property name="mdtooldir" value="${path::get-full-path('/Applications/Xamarin Studio.app/Contents/MacOS')}"/>
+        </if>
+      </if>
+    </if>
+    <echo message="Detected : ${os}"/>
+  </target>
+
+  <target name="clean" depends="checkos">
+    <delete dir="${project::get-base-directory()}\CocosSharp\obj" verbose="true">
+    </delete>
+  </target>
+
+  <target name="build" description="CocosSharp targets">
+    <call target="buildPCL"/>
+    <call target="buildpipeline"/>
+    <call target="buildios"/>
+    <!--call target="buildmac"/-->
+    <call target="buildandroid"/>
+    <call target="buildwindows"/>
+    <call target="buildwindowsphone81"/>
+    <call target="buildforms" />
+    <call target="buildnugets"/>
+    <call target="buildXStemplates" />
+    <call target="buildVStemplates"/>
+  </target>
+
+  <!-- PCL target-->
+  <target name="buildPCL" description="Build CocosSharp Portable project" depends="clean">
+    <if test="${os == 'Win32NT'}">
+      <exec program="msbuild " commandline="PCL\CocosSharp.PCL.sln /t:Clean /p:Configuration=${configuration}" />
+      <exec program="msbuild " commandline="PCL\CocosSharp.PCL.sln /t:Build /p:Configuration=${configuration}" />
+    </if>
+    <if test="${os == 'MacOS'}">
+      <exec program="xbuild" commandline="/t:Clean /p:Configuration=${configuration} ./PCL/CocosSharp.PCL.sln" />
+      <exec program="xbuild" commandline="/t:Build /p:Configuration=${configuration} ./PCL/CocosSharp.PCL.sln" />
+    </if>
+  </target>
+
+  <!-- CocosSharp custom content pipeline importers -->
+  <target name="buildpipeline" description="Build Content Importers" depends="clean">
+    <if test="${os == 'Win32NT'}">
+      <nant buildfile="CocosSharp.Content.Pipeline.Importers/default.build" target="build" />
+    </if>
+    <if test="${os == 'MacOS'}">
+      <nant buildfile="CocosSharp.Content.Pipeline.Importers/default.build" target="build" />	
+    </if>
+  </target>
+  
+  <!-- iOS target -->
+  <target name="buildios" description="Build iOS" depends="clean">
+    <if test="${os == 'Win32NT'}">
+      <exec program="msbuild " commandline="CocosSharp.iOS.sln /t:Clean /p:Configuration=${configuration}" />
+      <exec program="msbuild " commandline="CocosSharp.iOS.sln /t:Build /p:Configuration=${configuration}" />
+    </if>
+    <if test="${os == 'MacOS'}">
+      <exec program="mdtool" basedir="${mdtooldir}" commandline="build -t:Clean -c:${configuration}|iPhone  CocosSharp.iOS.sln" />
+      <exec program="mdtool" basedir="${mdtooldir}" commandline="build -t:Build -c:${configuration}|iPhone  CocosSharp.iOS.sln" />
+    </if>
+  </target>
+  
+  <!-- Android target -->
+  <target name="buildandroid" description="Build Android" depends="clean">
+    <if test="${os == 'Win32NT'}">
+      <exec program="msbuild " commandline="CocosSharp.Android.sln /t:Clean /p:Configuration=${configuration}" />
+      <exec program="msbuild " commandline="CocosSharp.Android.sln /t:Build /p:Configuration=${configuration}" />
+    </if>
+    <if test="${os == 'MacOS'}">
+      <exec program="mdtool" basedir="${mdtooldir}" commandline="build -t:Clean -c:${configuration} CocosSharp.Android.sln" />
+      <exec program="mdtool" basedir="${mdtooldir}" commandline="build -t:Build -c:${configuration} CocosSharp.Android.sln" />
+    </if>
+  </target>
+  
+  <!-- Windows DX target -->
+  <target name="buildwindows" description="Build Windows" depends="clean">
+    <if test="${os == 'Win32NT'}">
+      <exec program="msbuild " commandline="CocosSharp.WindowsDX.sln /t:Clean /p:Configuration=${configuration}" />
+      <exec program="msbuild " commandline="CocosSharp.WindowsDX.sln /t:Build /p:Configuration=${configuration}" />
+    </if>
+  </target>
+
+  <!-- Windows Phone 8.1 target -->
+  <target name="buildwindowsphone81" description="Build Windows Phone 8.1" depends="clean">
+    <if test="${os == 'Win32NT'}">
+      <exec program="${msbuild12dir}\msbuild.exe " commandline='CocosSharp.WindowsPhone81.sln /t:Clean /p:Configuration=${configuration} /p:Platform="Any CPU"' />
+      <exec program="${msbuild12dir}\msbuild.exe " commandline='CocosSharp.WindowsPhone81.sln /t:Rebuild /p:Configuration=${configuration} /p:Platform="Any CPU"' />
+    </if>
+  </target>
+
+  <!-- Mac target -->
+  <target name="buildmac" description="Build Mac OSX" depends="clean">
+    <if test="${os == 'MacOS'}">
+        <exec program="mdtool" basedir="${mdtooldir}" commandline="build -t:Clean -c:${configuration} CocosSharp.macos.sln" />
+        <exec program="mdtool" basedir="${mdtooldir}" commandline="build -t:Build -c:${configuration} CocosSharp.macos.sln" />
+    </if>
+  </target>
+
+  <!-- Xamarin.Forms target -->
+  <target name="buildforms" description="Build for Xamarin.Forms" depends="clean">
+    <if test="${os == 'Win32NT'}">
+        <exec program="msbuild" commandline='CocosSharp.Forms/CocosSharp.Forms.sln /t:Clean /p:Configuration=${configuration} /p:Platform="Any CPU"' />
+        <exec program="msbuild" commandline='CocosSharp.Forms/CocosSharp.Forms.sln /t:Build /p:Configuration=${configuration} /p:Platform="Any CPU"' />
+    </if>
+  </target>
+
+  <target name="buildnugets" description="Build NuGet Packages" depends="checkos">
+    <if test="${os == 'Win32NT'}">
+      <property name="nuget.cmd.dir.path" value="${project::get-base-directory()}\Build\NuGet\NuGet.exe" overwrite="true" /> 	
+      <property name="nuspec.file.dir.path" value="${project::get-base-directory()}\Build\NuGet\" overwrite="true" />
+      <property name="packages.dir.path" value="${nuspec.file.dir.path}bin" overwrite="true" />
+      
+                <echo message="" />
+                <echo message="" />
+                <echo message="NuGet Command directory: ${nuget.cmd.dir.path}" />
+                <echo message="Base directory: ${nuspec.file.dir.path}" />
+                <echo message="Output directory: ${packages.dir.path}" />
+                <echo message="" />
+
+      <mkdir dir="${packages.dir.path}" />
+      
+      <exec program="${nuget.cmd.dir.path} " commandline='pack "${nuspec.file.dir.path}CocosSharp.Forms.nuspec" -OutputDirectory "${packages.dir.path}" -BasePath .\' />
+      <exec program="${nuget.cmd.dir.path} " commandline='pack "${nuspec.file.dir.path}CocosSharp.nuspec" -OutputDirectory "${packages.dir.path}" -BasePath .\' />
+      <exec program="${nuget.cmd.dir.path} " commandline='pack "${nuspec.file.dir.path}CocosSharp.ContentBuild.Windows.nuspec" -OutputDirectory "${packages.dir.path}" -BasePath .\' />
+    </if>
+  </target>
+
+  <target name="buildVStemplates" description="Build CocosSharp VisualStudio project templates" depends="checkos">
+
+    <if test="${os == 'Win32NT'}">
+       <nant buildfile="Templates/VisualStudio/StarterTemplates/default.build" target="build" />
+    </if>
+  </target>
+
+    <target name="buildXStemplates" description="Build CocosSharp XamarinStudio project templates" depends="checkos">
+
+    <if test="${os == 'MacOS'}">
+        <delete dir="${project::get-base-directory()}/ProjectTemplates/XamarinStudio/Packages" />
+        <copy todir="${project::get-base-directory()}/ProjectTemplates/XamarinStudio/Packages" >
+        <fileset basedir="${project::get-base-directory()}/Build/NuGet/bin">
+            <include name="CocosSharp.*.nupkg" />
+            <include name="CocosSharp.Forms.*.nupkg" />
+        </fileset>
+        </copy>
+        <exec program="mdtool" basedir="${mdtooldir}" workingdir="${project::get-base-directory()}/Templates/XamarinStudio/" commandline="setup pack MonoDevelop.CocosSharp.addin.xml" />
+    </if>
+    </target>
+
+
+
+</project>

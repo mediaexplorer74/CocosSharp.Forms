@@ -1,0 +1,1 @@
+MainPackage=C:\Users\Admin\source\repos\CocosSharp.UWP\Src\Tests\tests\Example1\bin\WindowsUWP\ARM\Debug\Sample1.UWP_1.0.0.0_ARM_Debug.appx

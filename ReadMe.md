@@ -1,11 +1,12 @@
-# CocosSharp.Forms
+# CocosSharpTests
 
-CocosSharp[.Xamarin]Forms RnD  (UWP platform addition/implementation where MonoGame runs)
+CocosSharp XNA (MonoGame) RnD & Testing (UWP platform addition/implementation where MonoGame runs)
 
 ![Hello from Cocos](Images/intro.png)
+![Example1](Images/shot1.png)
 
 ## Status / Progress
-- UWP target added
+- UWP target added; Test "Example1" added too
 - Build compiled at/by now. :)
 - Doing more research & fixing "app logics" ...
 

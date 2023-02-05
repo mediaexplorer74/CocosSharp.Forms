@@ -1,0 +1,13 @@
+﻿{
+  "dependencies": {
+  },
+  "frameworks": {
+    "MonoAndroid,Version=v9.0": {
+    },
+	"UAP,Version=v10.0.15063": {
+	}
+  },
+  "runtimes": {
+    "win": { }
+  }
+}
